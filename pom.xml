@@ -16,10 +16,10 @@
     <packaging>pom</packaging>
 
     <modules>
-        <module>core</module>
-        <module>input</module>
-        <module>output</module>
-        <module>app</module>
+        <module>my-service-core</module>
+        <module>my-service-input</module>
+        <module>my-service-output</module>
+        <module>my-service-app</module>
     </modules>
 
     <properties>
