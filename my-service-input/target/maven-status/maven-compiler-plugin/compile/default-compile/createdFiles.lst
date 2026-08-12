@@ -1,0 +1,8 @@
+com\ibk\in\adapter\config\RequestHeadersArgumentResolver.class
+com\ibk\in\adapter\dto\HeaderRequest.class
+com\ibk\in\adapter\dto\ClienteRequest.class
+com\ibk\in\adapter\mapper\ClienteMapper.class
+com\ibk\in\adapter\dto\ClienteResponse.class
+com\ibk\in\adapter\config\WebFluxConfig.class
+com\ibk\in\adapter\controller\ClienteController.class
+com\ibk\in\adapter\mapper\ClienteMapperImpl.class

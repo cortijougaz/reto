@@ -1,9 +1,9 @@
 package com.ibk.core.model;
 
 public record RegisterUserCommand(
-        String name,
-        String email,
         String consumerId,
-        String traceparent
+        String traceparent,
+        String deviceType,
+        String deviceId
 ) {
 }

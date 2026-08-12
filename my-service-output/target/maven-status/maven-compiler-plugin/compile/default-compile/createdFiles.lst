@@ -1,0 +1,6 @@
+com\ibk\out\database\mapper\ClienteEntityMapper.class
+com\ibk\out\database\entity\ClienteEntity.class
+com\ibk\out\database\mapper\ClienteEntityMapperImpl.class
+com\ibk\out\database\entity\ClienteEntity$ClienteEntityBuilder.class
+com\ibk\out\database\ActualizarClienteAdapter.class
+com\ibk\out\database\repository\ClienteEntityRepository.class

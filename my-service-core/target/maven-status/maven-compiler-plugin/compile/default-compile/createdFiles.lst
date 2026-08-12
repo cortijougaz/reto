@@ -1,0 +1,9 @@
+com\ibk\core\model\Cliente.class
+com\ibk\core\business\ActualizarClienteUseCase.class
+com\ibk\core\port\in\usecase\ActualizarClienteInputPort.class
+com\ibk\core\port\in\usecase\ListarClienteInputPort.class
+com\ibk\core\model\RegisterUserCommand.class
+com\ibk\core\port\out\persistence\ActualizarClienteOutputPort.class
+com\ibk\core\port\in\usecase\CrearClienteInputPort.class
+com\ibk\core\port\in\usecase\ServiceBusPublisherInputPort.class
+com\ibk\core\util\UseCaseService.class
