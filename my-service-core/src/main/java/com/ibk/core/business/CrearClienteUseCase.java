@@ -20,6 +20,7 @@ public class CrearClienteUseCase implements CrearClienteInputPort {
 
     @Override
     public Mono<Cliente> crearCliente(RegisterUserCommand headers, Cliente cliente) {
+        String traceId = headers.traceId();
         Cliente nuevoCliente = new Cliente(
                 null,
                 cliente.getNombre(),

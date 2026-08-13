@@ -40,8 +40,7 @@ public class ClienteController {
     private final ClienteMapper clienteMapper;
 
     @PutMapping("/actualizar/{id}")
-    public Mono<ResponseEntity<ClienteResponse>> actualizarCliente(HeaderRequest headers,
-                                                                  @PathVariable(name = "id") String id,
+    public Mono<ResponseEntity<ClienteResponse>> actualizarCliente(HeaderRequest headers, @PathVariable(name = "id") String id,
                                                                   @Valid @RequestBody ClienteRequest cliente) {
         var command = clienteMapper.toRegisterUserCommand(headers);
 
@@ -51,8 +50,7 @@ public class ClienteController {
     }
 
     @PostMapping("/crear")
-    public Mono<ResponseEntity<ClienteResponse>> crearCliente(HeaderRequest headers,
-                                                                   @Valid @RequestBody ClienteRequest cliente) {
+    public Mono<ResponseEntity<ClienteResponse>> crearCliente(HeaderRequest headers, @Valid @RequestBody ClienteRequest cliente) {
         var command = clienteMapper.toRegisterUserCommand(headers);
 
         return crearClienteInputPort.crearCliente(command, clienteMapper.toDomain(cliente))

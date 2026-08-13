@@ -6,3 +6,21 @@ spring:
     name: mi-servicio-hexagonal
   mongodb:
     uri: mongodb://localhost:27017/spring_boot_test
+
+app:
+  transaction-codes:
+    CONSULTA_CLIENTE: "002"
+    REGISTRO_CLIENTE: "102"
+    ACTUALIZACION_CLIENTE: "202"
+    ELIMINAR_CLIENTE: "302"
+  regions:
+    ESTE_EEUU: "este"
+    ESTE_EEUU_2: "este2"
+    CENTRO_EEUU: "centro"
+    CENTRO_SUR_EEUU: "centrosur"
+  service-bus-enabled: true
+
+azure:
+  servicebus:
+    connection-string: "TestConnectionStringLocal"
+    queue-name: "cola-auditoria-cliente"
