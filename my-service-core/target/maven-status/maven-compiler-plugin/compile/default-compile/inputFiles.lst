@@ -1,9 +1,17 @@
 C:\Reto\my-service\my-service-core\src\main\java\com\ibk\core\business\ActualizarClienteUseCase.java
+C:\Reto\my-service\my-service-core\src\main\java\com\ibk\core\business\CrearClienteUseCase.java
+C:\Reto\my-service\my-service-core\src\main\java\com\ibk\core\business\EliminarClienteUseCase.java
+C:\Reto\my-service\my-service-core\src\main\java\com\ibk\core\business\ListarClienteUseCase.java
+C:\Reto\my-service\my-service-core\src\main\java\com\ibk\core\enums\RegionEnum.java
+C:\Reto\my-service\my-service-core\src\main\java\com\ibk\core\enums\StatusCodeEnum.java
+C:\Reto\my-service\my-service-core\src\main\java\com\ibk\core\enums\TransactionCodeEnum.java
 C:\Reto\my-service\my-service-core\src\main\java\com\ibk\core\exception\RecursoNoEncontradoException.java
+C:\Reto\my-service\my-service-core\src\main\java\com\ibk\core\model\Auditoria.java
 C:\Reto\my-service\my-service-core\src\main\java\com\ibk\core\model\Cliente.java
 C:\Reto\my-service\my-service-core\src\main\java\com\ibk\core\model\RegisterUserCommand.java
 C:\Reto\my-service\my-service-core\src\main\java\com\ibk\core\port\in\usecase\ActualizarClienteInputPort.java
 C:\Reto\my-service\my-service-core\src\main\java\com\ibk\core\port\in\usecase\CrearClienteInputPort.java
+C:\Reto\my-service\my-service-core\src\main\java\com\ibk\core\port\in\usecase\EliminarClienteInputPort.java
 C:\Reto\my-service\my-service-core\src\main\java\com\ibk\core\port\in\usecase\ListarClienteInputPort.java
 C:\Reto\my-service\my-service-core\src\main\java\com\ibk\core\port\in\usecase\ServiceBusPublisherInputPort.java
 C:\Reto\my-service\my-service-core\src\main\java\com\ibk\core\port\out\persistence\ActualizarClienteOutputPort.java
@@ -11,4 +19,5 @@ C:\Reto\my-service\my-service-core\src\main\java\com\ibk\core\port\out\persisten
 C:\Reto\my-service\my-service-core\src\main\java\com\ibk\core\port\out\persistence\CrearClienteOutputPort.java
 C:\Reto\my-service\my-service-core\src\main\java\com\ibk\core\port\out\persistence\EliminarClienteOutputPort.java
 C:\Reto\my-service\my-service-core\src\main\java\com\ibk\core\port\out\persistence\ListarClientesOutputPort.java
+C:\Reto\my-service\my-service-core\src\main\java\com\ibk\core\port\out\publisher\AuditoriaPublisherOutputPort.java
 C:\Reto\my-service\my-service-core\src\main\java\com\ibk\core\util\UseCaseService.java

@@ -1,7 +1,10 @@
 com\ibk\out\database\mapper\ClienteEntityMapper.class
+com\ibk\out\publisher\JsonAuditSerializer.class
+com\ibk\out\publisher\ServiceBusPublisherAdapter.class
 com\ibk\out\database\ClientePersistenceAdapter.class
 com\ibk\out\database\entity\ClienteEntity$ClienteEntityBuilder.class
 com\ibk\out\database\repository\ClienteEntityRepository.class
+com\ibk\out\config\AuditProperties.class
 com\ibk\out\database\config\MongoRepositoryConfig.class
 com\ibk\out\database\entity\ClienteEntity.class
 com\ibk\out\database\mapper\ClienteEntityMapperImpl.class

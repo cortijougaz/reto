@@ -12,7 +12,7 @@ app:
     CONSULTA_CLIENTE: "002"
     REGISTRO_CLIENTE: "102"
     ACTUALIZACION_CLIENTE: "202"
-    ELIMINAR_CLIENTE: "302"
+    BAJA_CLIENTE: "302"
   regions:
     ESTE_EEUU: "este"
     ESTE_EEUU_2: "este2"
