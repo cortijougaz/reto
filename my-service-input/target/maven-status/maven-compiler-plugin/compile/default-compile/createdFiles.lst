@@ -1,4 +1,6 @@
+com\ibk\in\adapter\exception\GlobalExceptionHandler.class
 com\ibk\in\adapter\config\RequestHeadersArgumentResolver.class
+com\ibk\in\adapter\dto\ApiErrorResponse.class
 com\ibk\in\adapter\dto\HeaderRequest.class
 com\ibk\in\adapter\dto\ClienteRequest.class
 com\ibk\in\adapter\mapper\ClienteMapper.class

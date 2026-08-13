@@ -36,7 +36,8 @@ public class ClientePersistenceAdapter implements CrearClienteOutputPort,
 
     @Override
     public Mono<Cliente> buscarPorId(UUID id) {
-        return null;
+        return repository.findById(id)
+                .map(clienteEntityMapper::toDomain);
     }
 
     @Override
@@ -45,12 +46,13 @@ public class ClientePersistenceAdapter implements CrearClienteOutputPort,
     }
 
     @Override
-    public Mono<Boolean> eliminarPorId(UUID id) {
-        return null;
+    public Mono<Void> eliminarPorId(UUID id) {
+        return repository.deleteById(id);
     }
 
     @Override
     public Flux<Cliente> listar() {
-        return null;
+        return repository.findAll()
+                .map(clienteEntityMapper::toDomain);
     }
 }
