@@ -12,7 +12,7 @@ import com.ibk.core.port.out.publisher.AuditoriaPublisherOutputPort;
 import com.ibk.core.util.UseCaseService;
 import reactor.core.publisher.Mono;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @UseCaseService
 public class CrearClienteUseCase implements CrearClienteInputPort {
@@ -35,7 +35,7 @@ public class CrearClienteUseCase implements CrearClienteInputPort {
                 cliente.getNombre(),
                 cliente.getApellidoPaterno(),
                 cliente.getApellidoMaterno(),
-                LocalDate.now(),
+                LocalDateTime.now(),
                 cliente.isEstado()
         );
 

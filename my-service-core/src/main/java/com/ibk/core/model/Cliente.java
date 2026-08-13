@@ -1,6 +1,6 @@
 package com.ibk.core.model;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Objects;
 
 public class Cliente {
@@ -9,13 +9,13 @@ public class Cliente {
     private String nombre;
     private String apellidoPaterno;
     private String apellidoMaterno;
-    private LocalDate fechaCreacion;
+    private LocalDateTime fechaCreacion;
     private boolean estado;
 
     public Cliente() {
     }
 
-    public Cliente(String id, String nombre, String apellidoPaterno, String apellidoMaterno, LocalDate fechaCreacion, boolean estado) {
+    public Cliente(String id, String nombre, String apellidoPaterno, String apellidoMaterno, LocalDateTime fechaCreacion, boolean estado) {
         this.id = id;
         this.nombre = nombre;
         this.apellidoPaterno = apellidoPaterno;
@@ -56,11 +56,11 @@ public class Cliente {
         this.apellidoMaterno = apellidoMaterno;
     }
 
-    public LocalDate getFechaCreacion() {
+    public LocalDateTime getFechaCreacion() {
         return fechaCreacion;
     }
 
-    public void setFechaCreacion(LocalDate fechaCreacion) {
+    public void setFechaCreacion(LocalDateTime fechaCreacion) {
         this.fechaCreacion = fechaCreacion;
     }
 
