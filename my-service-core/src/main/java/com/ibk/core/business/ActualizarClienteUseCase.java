@@ -22,4 +22,6 @@ public class ActualizarClienteUseCase implements ActualizarClienteInputPort {
     public Mono<Cliente> actualizarCliente(RegisterUserCommand headers, UUID id, Cliente cliente) {
         return actualizarClienteOutputPort.actualizarCliente(id, cliente);
     }
+
+
 }
