@@ -2,34 +2,31 @@ package com.ibk.out.database.mapper;
 
 import com.ibk.core.model.Cliente;
 import com.ibk.out.database.entity.ClienteEntity;
-import java.util.UUID;
 import javax.annotation.processing.Generated;
 import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2026-08-13T11:59:36-0500",
+    date = "2026-08-13T13:45:37-0500",
     comments = "version: 1.6.3, compiler: javac, environment: Java 21.0.6 (Oracle Corporation)"
 )
 @Component
 public class ClienteEntityMapperImpl implements ClienteEntityMapper {
 
     @Override
-    public ClienteEntity toEntity(UUID id, Cliente cliente) {
-        if ( id == null && cliente == null ) {
+    public ClienteEntity toEntity(Cliente cliente) {
+        if ( cliente == null ) {
             return null;
         }
 
         ClienteEntity.ClienteEntityBuilder clienteEntity = ClienteEntity.builder();
 
-        if ( cliente != null ) {
-            clienteEntity.nombre( cliente.getNombre() );
-            clienteEntity.apellidoPaterno( cliente.getApellidoPaterno() );
-            clienteEntity.apellidoMaterno( cliente.getApellidoMaterno() );
-            clienteEntity.fechaCreacion( cliente.getFechaCreacion() );
-            clienteEntity.estado( cliente.isEstado() );
-        }
-        clienteEntity.id( id );
+        clienteEntity.id( cliente.getId() );
+        clienteEntity.nombre( cliente.getNombre() );
+        clienteEntity.apellidoPaterno( cliente.getApellidoPaterno() );
+        clienteEntity.apellidoMaterno( cliente.getApellidoMaterno() );
+        clienteEntity.fechaCreacion( cliente.getFechaCreacion() );
+        clienteEntity.estado( cliente.isEstado() );
 
         return clienteEntity.build();
     }

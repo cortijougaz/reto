@@ -5,13 +5,12 @@ import com.ibk.core.model.RegisterUserCommand;
 import com.ibk.in.adapter.dto.ClienteRequest;
 import com.ibk.in.adapter.dto.ClienteResponse;
 import com.ibk.in.adapter.dto.HeaderRequest;
-import java.util.UUID;
 import javax.annotation.processing.Generated;
 import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2026-08-13T11:59:34-0500",
+    date = "2026-08-13T13:45:37-0500",
     comments = "version: 1.6.3, compiler: javac, environment: Java 21.0.6 (Oracle Corporation)"
 )
 @Component
@@ -62,7 +61,7 @@ public class ClienteMapperImpl implements ClienteMapper {
             return null;
         }
 
-        UUID id = null;
+        String id = null;
 
         id = cliente.getId();
 
