@@ -2,11 +2,10 @@ package com.ibk.core.model;
 
 import java.time.LocalDate;
 import java.util.Objects;
-import java.util.UUID;
 
 public class Cliente {
 
-    private UUID id;
+    private String id;
     private String nombre;
     private String apellidoPaterno;
     private String apellidoMaterno;
@@ -16,7 +15,7 @@ public class Cliente {
     public Cliente() {
     }
 
-    public Cliente(UUID id, String nombre, String apellidoPaterno, String apellidoMaterno, LocalDate fechaCreacion, boolean estado) {
+    public Cliente(String id, String nombre, String apellidoPaterno, String apellidoMaterno, LocalDate fechaCreacion, boolean estado) {
         this.id = id;
         this.nombre = nombre;
         this.apellidoPaterno = apellidoPaterno;
@@ -25,11 +24,11 @@ public class Cliente {
         this.estado = estado;
     }
 
-    public UUID getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(UUID id) {
+    public void setId(String id) {
         this.id = id;
     }
 

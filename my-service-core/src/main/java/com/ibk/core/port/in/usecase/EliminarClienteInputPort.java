@@ -4,6 +4,7 @@ import com.ibk.core.model.Cliente;
 import com.ibk.core.model.RegisterUserCommand;
 import reactor.core.publisher.Mono;
 
-public interface CrearClienteInputPort {
-    Mono<Cliente> crearCliente(RegisterUserCommand headers, Cliente cliente);
+public interface EliminarClienteInputPort {
+
+    Mono<Void> eliminarPorIdCliente(RegisterUserCommand headers, String id);
 }
