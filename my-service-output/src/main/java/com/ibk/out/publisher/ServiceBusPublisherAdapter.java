@@ -50,11 +50,6 @@ public class ServiceBusPublisherAdapter implements AuditoriaPublisherOutputPort 
         message.setCorrelationId(traceId);
         message.getApplicationProperties().put("traceId", traceId);
 
-        log.info("[LOCAL] Simulación de envío a Azure Service Bus.");
-        log.info("[MESSAGE-ID]: {}", message.getMessageId());
-        log.info("[TRACE-ID]: {}", traceId);
-        log.info("[PAYLOAD-JSON]: {}", json);
-
         return sender.sendMessage(message)
                 .doOnSuccess(ignored ->
                         log.info(

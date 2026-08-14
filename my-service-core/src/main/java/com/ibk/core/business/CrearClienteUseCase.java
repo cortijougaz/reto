@@ -54,12 +54,8 @@ public class CrearClienteUseCase implements CrearClienteInputPort {
                 );
     }
 
-    private Mono<Void> publicarAuditoria(
-            RegisterUserCommand headers,
-            Cliente inbound,
-            Cliente outbound,
-            StatusCodeEnum status
-    ) {
+    private Mono<Void> publicarAuditoria(RegisterUserCommand headers, Cliente inbound,
+                                         Cliente outbound, StatusCodeEnum status) {
         Auditoria auditoria = new Auditoria(
                 headers.consumerId(),
                 headers.traceId(),
@@ -75,10 +71,7 @@ public class CrearClienteUseCase implements CrearClienteInputPort {
         return auditoriaPublisherOutputPort.publicar(auditoria);
     }
 
-    private Mono<Void> publicarAuditoriaError(
-            RegisterUserCommand headers,
-            Cliente inbound
-    ) {
+    private Mono<Void> publicarAuditoriaError(RegisterUserCommand headers, Cliente inbound) {
         return publicarAuditoriaBestEffort(
                 headers,
                 inbound,
@@ -87,12 +80,8 @@ public class CrearClienteUseCase implements CrearClienteInputPort {
         );
     }
 
-    private Mono<Void> publicarAuditoriaBestEffort(
-            RegisterUserCommand headers,
-            Cliente inbound,
-            Cliente outbound,
-            StatusCodeEnum status
-    ) {
+    private Mono<Void> publicarAuditoriaBestEffort(RegisterUserCommand headers, Cliente inbound,
+                                                   Cliente outbound, StatusCodeEnum status) {
         return Mono.defer(() -> publicarAuditoria(headers, inbound, outbound, status))
                 .onErrorComplete();
     }

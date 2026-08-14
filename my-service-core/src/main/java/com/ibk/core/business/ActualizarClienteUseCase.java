@@ -74,8 +74,7 @@ public class ActualizarClienteUseCase implements ActualizarClienteInputPort {
             RegisterUserCommand headers,
             Cliente inbound,
             Cliente outbound,
-            StatusCodeEnum status
-    ) {
+            StatusCodeEnum status) {
         return Mono.defer(() -> publicarAuditoria(headers, inbound, outbound, status))
                 .onErrorComplete();
     }
