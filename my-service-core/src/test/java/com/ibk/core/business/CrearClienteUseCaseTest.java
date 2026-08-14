@@ -81,4 +81,19 @@ class CrearClienteUseCaseTest {
         assertSame(entrada, captor.getValue().inbound());
         assertNull(captor.getValue().outbound());
     }
+
+    @Test
+    void debeRetornarClienteCreadoAunqueFalleAuditoria() {
+        Cliente entrada = ClienteFixtures.clienteEntrada();
+        Cliente persistido = ClienteFixtures.clientePersistido("id-generado");
+        when(outputPort.crear(any())).thenReturn(Mono.just(persistido));
+        when(auditoriaPort.publicar(any()))
+                .thenReturn(Mono.error(new RuntimeException("service bus caido")));
+
+        StepVerifier.create(useCase.crearCliente(ClienteFixtures.HEADERS, entrada))
+                .expectNext(persistido)
+                .verifyComplete();
+
+        verify(auditoriaPort).publicar(any());
+    }
 }

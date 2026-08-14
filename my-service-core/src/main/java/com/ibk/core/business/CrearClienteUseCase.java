@@ -41,7 +41,7 @@ public class CrearClienteUseCase implements CrearClienteInputPort {
 
         return crearClienteOutputPort.crear(nuevoCliente)
                 .flatMap(clienteCreado ->
-                        publicarAuditoria(
+                        publicarAuditoriaBestEffort(
                                 headers,
                                 cliente,
                                 clienteCreado,
@@ -79,11 +79,21 @@ public class CrearClienteUseCase implements CrearClienteInputPort {
             RegisterUserCommand headers,
             Cliente inbound
     ) {
-        return publicarAuditoria(
+        return publicarAuditoriaBestEffort(
                 headers,
                 inbound,
                 null,
                 StatusCodeEnum.STATUS_DESCONOCIDO
-        ).onErrorResume(errorAuditoria -> Mono.empty());
+        );
+    }
+
+    private Mono<Void> publicarAuditoriaBestEffort(
+            RegisterUserCommand headers,
+            Cliente inbound,
+            Cliente outbound,
+            StatusCodeEnum status
+    ) {
+        return Mono.defer(() -> publicarAuditoria(headers, inbound, outbound, status))
+                .onErrorComplete();
     }
 }

@@ -31,7 +31,13 @@ public class ServiceBusPublisherAdapter implements AuditoriaPublisherOutputPort 
             }
 
             return enviarAServiceBus(json, auditoria.traceId());
-        });
+        }).doOnError(error ->
+                log.error(
+                        "No se pudo publicar la auditoria: traceId={}, type={}",
+                        auditoria.traceId(),
+                        error.getClass().getSimpleName()
+                )
+        );
     }
 
     private Mono<Void> enviarAServiceBus(

@@ -33,7 +33,7 @@ public class ActualizarClienteUseCase implements ActualizarClienteInputPort {
                         )
                 ))
                 .flatMap(resultado ->
-                        publicarAuditoria(
+                        publicarAuditoriaBestEffort(
                                 headers,
                                 cliente,
                                 resultado,
@@ -41,7 +41,7 @@ public class ActualizarClienteUseCase implements ActualizarClienteInputPort {
                         ).thenReturn(resultado)
                 )
                 .onErrorResume(error ->
-                        publicarAuditoria(
+                        publicarAuditoriaBestEffort(
                                 headers,
                                 cliente,
                                 null,
@@ -68,5 +68,15 @@ public class ActualizarClienteUseCase implements ActualizarClienteInputPort {
         );
 
         return auditoriaPublisherOutputPort.publicar(auditoria);
+    }
+
+    private Mono<Void> publicarAuditoriaBestEffort(
+            RegisterUserCommand headers,
+            Cliente inbound,
+            Cliente outbound,
+            StatusCodeEnum status
+    ) {
+        return Mono.defer(() -> publicarAuditoria(headers, inbound, outbound, status))
+                .onErrorComplete();
     }
 }

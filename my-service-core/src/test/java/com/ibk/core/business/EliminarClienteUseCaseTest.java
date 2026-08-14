@@ -74,4 +74,16 @@ class EliminarClienteUseCaseTest {
                 .expectErrorMatches(error -> error == falloMongo)
                 .verify();
     }
+
+    @Test
+    void debeCompletarEliminacionAunqueFalleAuditoria() {
+        when(outputPort.eliminarPorId("1")).thenReturn(Mono.just(true));
+        when(auditoriaPort.publicar(any()))
+                .thenReturn(Mono.error(new RuntimeException("service bus caido")));
+
+        StepVerifier.create(useCase.eliminarPorIdCliente(ClienteFixtures.HEADERS, "1"))
+                .verifyComplete();
+
+        verify(auditoriaPort).publicar(any());
+    }
 }

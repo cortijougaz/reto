@@ -13,14 +13,11 @@ import org.mockito.ArgumentCaptor;
 import reactor.core.publisher.Mono;
 import reactor.test.StepVerifier;
 
-import java.util.concurrent.atomic.AtomicInteger;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -78,21 +75,17 @@ class ActualizarClienteUseCaseTest {
     }
 
     @Test
-    void debePropagarFalloDeAuditoriaObligatoria() {
+    void debeRetornarClienteActualizadoAunqueFalleAuditoria() {
         Cliente entrada = ClienteFixtures.clienteEntrada();
         Cliente actualizado = ClienteFixtures.clientePersistido("id-1");
         IllegalStateException falloAuditoria = new IllegalStateException("service bus caído");
-        AtomicInteger publicaciones = new AtomicInteger();
         when(outputPort.actualizarCliente("id-1", entrada)).thenReturn(Mono.just(actualizado));
-        when(auditoriaPort.publicar(any()))
-                .thenAnswer(invocation -> publicaciones.getAndIncrement() == 0
-                        ? Mono.error(falloAuditoria)
-                        : Mono.empty());
+        when(auditoriaPort.publicar(any())).thenReturn(Mono.error(falloAuditoria));
 
         StepVerifier.create(useCase.actualizarCliente(ClienteFixtures.HEADERS, "id-1", entrada))
-                .expectErrorMatches(error -> error == falloAuditoria)
-                .verify();
+                .expectNext(actualizado)
+                .verifyComplete();
 
-        verify(auditoriaPort, times(2)).publicar(any());
+        verify(auditoriaPort).publicar(any());
     }
 }

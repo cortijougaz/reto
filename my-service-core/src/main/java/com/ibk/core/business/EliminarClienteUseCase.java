@@ -36,7 +36,7 @@ public class EliminarClienteUseCase implements EliminarClienteInputPort {
                         new RecursoNoEncontradoException(
                                 "No se encontró el cliente con ID: " + id)))
                 .flatMap(resultado ->
-                        publicarAuditoria(
+                        publicarAuditoriaBestEffort(
                                 headers,
                                 id,
                                 StatusCodeEnum.STATUS_CORRECTO
@@ -73,10 +73,19 @@ public class EliminarClienteUseCase implements EliminarClienteInputPort {
             RegisterUserCommand headers,
             String id
     ) {
-        return publicarAuditoria(
+        return publicarAuditoriaBestEffort(
                 headers,
                 id,
                 StatusCodeEnum.STATUS_DESCONOCIDO
-        ).onErrorResume(errorAuditoria -> Mono.empty());
+        );
+    }
+
+    private Mono<Void> publicarAuditoriaBestEffort(
+            RegisterUserCommand headers,
+            String id,
+            StatusCodeEnum status
+    ) {
+        return Mono.defer(() -> publicarAuditoria(headers, id, status))
+                .onErrorComplete();
     }
 }

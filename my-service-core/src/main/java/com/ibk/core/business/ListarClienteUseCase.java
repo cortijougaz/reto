@@ -37,7 +37,7 @@ public class ListarClienteUseCase implements ListarClienteInputPort {
         return listarClientesOutputPort.listar()
                 .collectList()
                 .flatMap(clientes ->
-                        publicarAuditoria(
+                        publicarAuditoriaBestEffort(
                                 headers,
                                 clientes,
                                 StatusCodeEnum.STATUS_CORRECTO
@@ -57,7 +57,7 @@ public class ListarClienteUseCase implements ListarClienteInputPort {
                         new RecursoNoEncontradoException(
                                 "No se encontró el cliente con ID: " + id)))
                 .flatMap(cliente ->
-                        publicarAuditoria(
+                        publicarAuditoriaBestEffort(
                                 headers,
                                 cliente,
                                 StatusCodeEnum.STATUS_CORRECTO
@@ -90,10 +90,19 @@ public class ListarClienteUseCase implements ListarClienteInputPort {
     }
 
     private Mono<Void> publicarAuditoriaError(RegisterUserCommand headers) {
-        return publicarAuditoria(
+        return publicarAuditoriaBestEffort(
                 headers,
                 null,
                 StatusCodeEnum.STATUS_DESCONOCIDO
-        ).onErrorResume(errorAuditoria -> Mono.empty());
+        );
+    }
+
+    private Mono<Void> publicarAuditoriaBestEffort(
+            RegisterUserCommand headers,
+            Object outbound,
+            StatusCodeEnum status
+    ) {
+        return Mono.defer(() -> publicarAuditoria(headers, outbound, status))
+                .onErrorComplete();
     }
 }

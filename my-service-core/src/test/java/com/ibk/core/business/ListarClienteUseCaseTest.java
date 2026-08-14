@@ -103,4 +103,32 @@ class ListarClienteUseCaseTest {
         assertEquals(StatusCodeEnum.STATUS_DESCONOCIDO, captor.getValue().status());
         assertNull(captor.getValue().outbound());
     }
+
+    @Test
+    void debeListarClientesAunqueFalleAuditoria() {
+        Cliente cliente = ClienteFixtures.clientePersistido("1");
+        when(listarPort.listar()).thenReturn(Flux.just(cliente));
+        when(auditoriaPort.publicar(any()))
+                .thenReturn(Mono.error(new RuntimeException("service bus caido")));
+
+        StepVerifier.create(useCase.listarCliente(ClienteFixtures.HEADERS))
+                .expectNext(cliente)
+                .verifyComplete();
+
+        verify(auditoriaPort).publicar(any());
+    }
+
+    @Test
+    void debeRetornarClientePorIdAunqueFalleAuditoria() {
+        Cliente cliente = ClienteFixtures.clientePersistido("1");
+        when(buscarPort.listarPorId("1")).thenReturn(Mono.just(cliente));
+        when(auditoriaPort.publicar(any()))
+                .thenReturn(Mono.error(new RuntimeException("service bus caido")));
+
+        StepVerifier.create(useCase.listarPorIdCliente(ClienteFixtures.HEADERS, "1"))
+                .expectNext(cliente)
+                .verifyComplete();
+
+        verify(auditoriaPort).publicar(any());
+    }
 }
