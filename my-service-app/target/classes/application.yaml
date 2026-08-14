@@ -22,5 +22,6 @@ app:
 
 azure:
   servicebus:
-    connection-string: "TestConnectionStringLocal"
+    connection-string: "Endpoint=sb://localhost;SharedAccessKeyName=RootManageSharedAccessKey;SharedAccessKey=SAS_KEY_VALUE;UseDevelopmentEmulator=true;"
+    custom-endpoint-address: ""
     queue-name: "cola-auditoria-cliente"

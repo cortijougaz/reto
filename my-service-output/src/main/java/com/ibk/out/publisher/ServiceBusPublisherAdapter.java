@@ -1,6 +1,7 @@
 package com.ibk.out.publisher;
 
 import com.azure.messaging.servicebus.ServiceBusMessage;
+import com.azure.messaging.servicebus.ServiceBusSenderAsyncClient;
 import com.ibk.core.model.Auditoria;
 import com.ibk.core.port.out.publisher.AuditoriaPublisherOutputPort;
 import com.ibk.out.config.AuditProperties;
@@ -16,6 +17,7 @@ public class ServiceBusPublisherAdapter implements AuditoriaPublisherOutputPort 
 
     private final JsonAuditSerializer serializer;
     private final AuditProperties properties;
+    private final ServiceBusSenderAsyncClient sender;
 
     @Override
     public Mono<Void> publicar(Auditoria auditoria) {
@@ -33,26 +35,33 @@ public class ServiceBusPublisherAdapter implements AuditoriaPublisherOutputPort 
             return enviarAServiceBus(json, auditoria.traceId());
         }).doOnError(error ->
                 log.error(
-                        "No se pudo publicar la auditoria: traceId={}, type={}",
+                        "No se pudo publicar la auditoría: traceId={}, type={}",
                         auditoria.traceId(),
                         error.getClass().getSimpleName()
                 )
         );
     }
 
-    private Mono<Void> enviarAServiceBus(
-            String json,
-            String traceId
-    ) {
-        return Mono.fromRunnable(() -> {
-            ServiceBusMessage message = new ServiceBusMessage(json);
-            message.setContentType("application/json");
-            message.getApplicationProperties().put("traceId", traceId);
+    private Mono<Void> enviarAServiceBus(String json, String traceId) {
 
-            log.info("[LOCAL] Simulación de envío a Azure Service Bus.");
-            log.info("[MESSAGE-ID]: {}", message.getMessageId());
-            log.info("[TRACE-ID]: {}", traceId);
-            log.info("[PAYLOAD-JSON]: {}", json);
-        });
+        ServiceBusMessage message = new ServiceBusMessage(json);
+        message.setContentType("application/json");
+        message.setMessageId(traceId);
+        message.setCorrelationId(traceId);
+        message.getApplicationProperties().put("traceId", traceId);
+
+        log.info("[LOCAL] Simulación de envío a Azure Service Bus.");
+        log.info("[MESSAGE-ID]: {}", message.getMessageId());
+        log.info("[TRACE-ID]: {}", traceId);
+        log.info("[PAYLOAD-JSON]: {}", json);
+
+        return sender.sendMessage(message)
+                .doOnSuccess(ignored ->
+                        log.info(
+                                "Auditoría publicada en Service Bus: messageId={}, traceId={}",
+                                message.getMessageId(),
+                                traceId
+                        )
+                );
     }
 }
